@@ -1,9 +1,7 @@
 import React from 'react';
 
-function Functional() {
+export default function Functional(props) {
     return(
-        <h1 className='name'>{name}</h1>
+        <h1 className='f_name'>{props.f_name}</h1>
     )
 }
-
-export default Functional;
