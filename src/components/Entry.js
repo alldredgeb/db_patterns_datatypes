@@ -9,12 +9,28 @@ class Entry extends Component {
     this.state = {
       f_name: 'Benjamin',
       light: 0,
-      gravity: 0
+      gravity: 0,
+      image_1: '',
+      image_2: '',
+      image_3: ''
 
     }
     this.onLightChange = this.onLightChange.bind(this);
     this.onGravityChange = this.onGravityChange.bind(this);
     this.handleSubmitOnClick = this.handleSubmitOnClick.bind(this);
+  }
+
+  componentDidMount() {
+    axios.get(`/api/get_images`).then( response => {
+      console.log('get images response', response.data[0]);
+      this.setState({
+        image_1: response.data[0].img_1,
+        image_2: response.data[0].img_2,
+        image_3: response.data[0].img_3
+      })
+    }).catch( error => {
+      console.log('get images error', error);
+    })
   }
 
   onLightChange(event) {
@@ -43,7 +59,10 @@ class Entry extends Component {
   render() {
     return (
       <div>
-        <Functional f_name={this.state.f_name}/>
+        <Functional f_name={this.state.f_name} />
+        <img className='pic_one' src={this.state.image_1} alt='Pic One'/>
+        <img className='pic_two' src={this.state.image_2} alt='Pic Two'/>
+        <img className='pic_three' src={this.state.image_3} alt='Pic Three'/>
         <p>How many meters per second does light travel?</p>
         <input onChange={this.onLightChange}/>
         <p>What number represents the gravitational constant?</p>

@@ -29,6 +29,15 @@ massive(process.env.CONNECTION_STRING).then(function(db) {
 });
 
 //ENDPOINTS
+app.get(`/api/get_images`, (req, res) => {
+  app.get('db').getImages(1).then( response => {
+    res.status(200).send(response);
+  }).catch( error => {
+    console.log('get images error', error);
+    res.status(500).send(error);
+  })
+})
+
 app.post('/api/addanswers', onPostNotification, (req, res) => {
   app.get('db').addAnswers(req.body.light, req.body.gravity).then( () => {
     res.status(200).send("answers added!");

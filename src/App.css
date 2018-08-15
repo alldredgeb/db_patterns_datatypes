@@ -2,3 +2,7 @@
   text-align: center;
 }
 
+.pic_one, .pic_two, .pic_three {
+  width: 200px;
+  height: 200px;
+}
